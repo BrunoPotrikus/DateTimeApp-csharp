@@ -75,6 +75,8 @@ public class Program
         FormatDate(date);
         CompareDate(date);
         GlobalizationDate(date);
+        LocalDate();
+        Timezone();
     }
 
     public static void DateNow()
@@ -86,6 +88,8 @@ public class Program
         FormatDate(date);
         CompareDate(date);
         GlobalizationDate(date);
+        LocalDate();
+        Timezone();
     }
 
     public static void FormatDate(DateTime date)
@@ -127,5 +131,34 @@ public class Program
         Console.WriteLine($"Formato de data no Brasil: {date.ToString("D", br)}");
         Console.WriteLine($"Formato de data nos EUA: {date.ToString("D", us)}");
         Console.WriteLine($"Formato de data na Dinamarca: {date.ToString("D", de)}");
+    }
+
+    public static void LocalDate()
+    {
+        var utcDate = DateTime.UtcNow;
+
+        Console.WriteLine($"DateTime local: {DateTime.Now}");
+        Console.WriteLine($"DateTime universal: {utcDate}");
+        Console.WriteLine($"DateTime universal convertido para local: {utcDate.ToLocalTime()}");
+    }
+
+    public static void Timezone()
+    {
+        var utcDate = DateTime.UtcNow;
+
+        var timezoneBrazil = TimeZoneInfo.FindSystemTimeZoneById("E. South America Standard Time");
+
+        var currentTimezone = TimeZoneInfo.ConvertTimeFromUtc(utcDate, timezoneBrazil);
+
+        Console.WriteLine($"Formatação de data usando timezone: {currentTimezone}");
+
+        var timezones = TimeZoneInfo.GetSystemTimeZones();
+        foreach (var timezone in timezones)
+        {
+            Console.WriteLine($"Id: {timezone.Id}");
+            Console.WriteLine($"Timezone: {timezone}");
+            Console.WriteLine($"Formato: {TimeZoneInfo.ConvertTimeFromUtc(utcDate, timezone)}");
+            Console.WriteLine("-------------------------------------");
+        }
     }
 }
