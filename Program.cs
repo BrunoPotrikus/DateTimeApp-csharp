@@ -77,6 +77,9 @@ public class Program
         GlobalizationDate(date);
         LocalDate();
         Timezone();
+        Span();
+        Console.WriteLine(IsWeekend(date.DayOfWeek));
+        Console.WriteLine(DaylightSavingTime(date));
     }
 
     public static void DateNow()
@@ -90,6 +93,9 @@ public class Program
         GlobalizationDate(date);
         LocalDate();
         Timezone();
+        Span();
+        Console.WriteLine(IsWeekend(date.DayOfWeek));
+        Console.WriteLine(DaylightSavingTime(date));
     }
 
     public static void FormatDate(DateTime date)
@@ -160,5 +166,31 @@ public class Program
             Console.WriteLine($"Formato: {TimeZoneInfo.ConvertTimeFromUtc(utcDate, timezone)}");
             Console.WriteLine("-------------------------------------");
         }
+    }
+
+    public static void Span()
+    {
+        var timeSpan = new TimeSpan();
+        Console.WriteLine($"TimeSpan: {timeSpan}");
+
+        var timeSpanHoraMinutoSegundo = new TimeSpan(12, 45, 32);
+        Console.WriteLine($"TimeSpan com hora, minuto e segundo: {timeSpanHoraMinutoSegundo}");
+
+        var timeSpanDiaHoraMinutoSegundo = new TimeSpan(100, 12, 45, 32);
+        Console.WriteLine($"TimeSpan com hora, minuto e segundo: {timeSpanDiaHoraMinutoSegundo}");
+
+        Console.WriteLine($"Cálculo de horas utilizando TimeSpan: {timeSpanHoraMinutoSegundo - timeSpanDiaHoraMinutoSegundo}");
+        Console.WriteLine($"Cálculo de dias utilizando TimeSpan: {timeSpanDiaHoraMinutoSegundo.Days}");
+        Console.WriteLine($"Adicionando horas utilizando TimeSpan: {timeSpanDiaHoraMinutoSegundo.Add(new TimeSpan(12, 0, 0))}");
+    }
+
+    public static string IsWeekend(DayOfWeek day)
+    {
+        return day == DayOfWeek.Saturday || day == DayOfWeek.Sunday ? "É fim de semana" : "Não É fim de semana";
+    }
+
+    public static string DaylightSavingTime(DateTime date)
+    {
+        return date.IsDaylightSavingTime() ? "Estamos no horário de verão" : "Não estamos no horário de verão";
     }
 }
