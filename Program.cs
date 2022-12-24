@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 
 public class Program
 {
@@ -73,6 +74,7 @@ public class Program
         Console.WriteLine($"Hoje é {date:D}. Faltam apenas {365 - date.DayOfYear} dias para {date.AddYears(1).Year}.");
         FormatDate(date);
         CompareDate(date);
+        GlobalizationDate(date);
     }
 
     public static void DateNow()
@@ -83,6 +85,7 @@ public class Program
         Console.WriteLine($"Hoje é {date:D}. Faltam apenas {365 - date.DayOfYear} dias para {date.AddYears(1).Year}.");
         FormatDate(date);
         CompareDate(date);
+        GlobalizationDate(date);
     }
 
     public static void FormatDate(DateTime date)
@@ -107,11 +110,22 @@ public class Program
 
         if (date.Date == dateNow.Date)
         {
-            Console.Write("Data atualizada");
+            Console.WriteLine("Data atualizada");
         }
         else
         {
             Console.WriteLine("Data desatulizada");
         }
+    }
+
+    public static void GlobalizationDate(DateTime date)
+    {
+        var br = new CultureInfo("pt-BR");
+        var us = new CultureInfo("en-US");
+        var de = new CultureInfo("de-DE");
+
+        Console.WriteLine($"Formato de data no Brasil: {date.ToString("D", br)}");
+        Console.WriteLine($"Formato de data nos EUA: {date.ToString("D", us)}");
+        Console.WriteLine($"Formato de data na Dinamarca: {date.ToString("D", de)}");
     }
 }
