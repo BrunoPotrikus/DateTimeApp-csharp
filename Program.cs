@@ -37,11 +37,18 @@ public class Program
 
         Console.WriteLine($"Dia da semana: {date.DayOfWeek}");
         Console.WriteLine($"Dia do ano: {date.DayOfYear}");
-        Console.WriteLine($"Faltam apenas {365 - date.DayOfYear} dias para {date.Year + 1}");
+        Console.WriteLine($"Hoje é {date.Day} de {date:y}. Faltam apenas {365 - date.DayOfYear} dias para {date.Year + 1}.");
     }
     public static DateTime Date(int year, int month, int day, int hour, int min, int sec)
     {
         var date = new DateTime(year, month, day, hour, min, sec);
+        FormatDate(date);
         return date;
+    }
+
+    public static void FormatDate(DateTime date)
+    {
+        var formated = $"{date:dd/MM/yyyy hh:mm:ss z}";
+        Console.WriteLine(formated);
     }
 }
