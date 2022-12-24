@@ -72,6 +72,7 @@ public class Program
         Console.WriteLine($"Dia do ano: {date.DayOfYear}");
         Console.WriteLine($"Hoje é {date:D}. Faltam apenas {365 - date.DayOfYear} dias para {date.AddYears(1).Year}.");
         FormatDate(date);
+        CompareDate(date);
     }
 
     public static void DateNow()
@@ -81,6 +82,7 @@ public class Program
         Console.WriteLine($"Dia do ano: {date.DayOfYear}");
         Console.WriteLine($"Hoje é {date:D}. Faltam apenas {365 - date.DayOfYear} dias para {date.AddYears(1).Year}.");
         FormatDate(date);
+        CompareDate(date);
     }
 
     public static void FormatDate(DateTime date)
@@ -97,5 +99,19 @@ public class Program
         Console.WriteLine($"DateTime padronizado: {date:r}");
         Console.WriteLine($"Formato de data usado em arquivos .json: {date:s}");
         Console.WriteLine($"Padrão universal: {date:u}");
+    }
+
+    public static void CompareDate(DateTime date)
+    {
+        var dateNow = DateTime.Now;
+
+        if (date.Date == dateNow.Date)
+        {
+            Console.Write("Data atualizada");
+        }
+        else
+        {
+            Console.WriteLine("Data desatulizada");
+        }
     }
 }
