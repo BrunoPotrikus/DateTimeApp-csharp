@@ -10,6 +10,39 @@ public class Program
     public static void Menu()
     {
         Console.Clear();
+        Console.WriteLine("1 - Visualizar data atual");
+        Console.WriteLine("2 - Inserir uma data");
+        var option = short.Parse(Console.ReadLine());
+
+        GetOption(option);
+    }
+
+    public static void GetOption(short option)
+    {
+        switch (option)
+        {
+            case 0:
+                Environment.Exit(0);
+                break;
+
+            case 1:
+                DateNow();
+                break;
+
+            case 2:
+                InsertDate();
+                break;
+
+            default:
+                Console.Write("Opção inválida!");
+                Menu();
+                break;
+        }
+    }
+
+    public static void InsertDate()
+    {
+        Console.Clear();
 
         Console.Write("Digite o ano atual: ");
         var year = int.Parse(Console.ReadLine());
@@ -29,26 +62,40 @@ public class Program
         Console.Write("Digite o segundo atual (pode ser 0): ");
         var sec = int.Parse(Console.ReadLine());
 
-        Show(year, month, day, hour, min, sec);
+        Date(year, month, day, hour, min, sec);
     }
-    public static void Show(int year, int month, int day, int hour, int min, int sec)
-    {
-        var date = Date(year, month, day, hour, min, sec);
 
-        Console.WriteLine($"Dia da semana: {date.DayOfWeek}");
-        Console.WriteLine($"Dia do ano: {date.DayOfYear}");
-        Console.WriteLine($"Hoje é {date.Day} de {date:y}. Faltam apenas {365 - date.DayOfYear} dias para {date.Year + 1}.");
-    }
-    public static DateTime Date(int year, int month, int day, int hour, int min, int sec)
+    public static void Date(int year, int month, int day, int hour, int min, int sec)
     {
         var date = new DateTime(year, month, day, hour, min, sec);
+        Console.WriteLine($"Dia da semana: {date.DayOfWeek}");
+        Console.WriteLine($"Dia do ano: {date.DayOfYear}");
+        Console.WriteLine($"Hoje é {date:D}. Faltam apenas {365 - date.DayOfYear} dias para {date.AddYears(1).Year}.");
         FormatDate(date);
-        return date;
+    }
+
+    public static void DateNow()
+    {
+        var date = DateTime.Now;
+        Console.WriteLine($"Dia da semana: {date.DayOfWeek}");
+        Console.WriteLine($"Dia do ano: {date.DayOfYear}");
+        Console.WriteLine($"Hoje é {date:D}. Faltam apenas {365 - date.DayOfYear} dias para {date.AddYears(1).Year}.");
+        FormatDate(date);
     }
 
     public static void FormatDate(DateTime date)
     {
         var formated = $"{date:dd/MM/yyyy hh:mm:ss z}";
         Console.WriteLine(formated);
+
+        Console.WriteLine($"Short DateTime: {date:t}");
+        Console.WriteLine($"Short Date: {date:d}");
+        Console.WriteLine($"Long DateTime: {date:T}");
+        Console.WriteLine($"Long Date: {date:D}");
+        Console.WriteLine($"Long Date e Short DateTime: {date:f}");
+        Console.WriteLine($"Short Date e Short DateTime: {date:g}");
+        Console.WriteLine($"DateTime padronizado: {date:r}");
+        Console.WriteLine($"Formato de data usado em arquivos .json: {date:s}");
+        Console.WriteLine($"Padrão universal: {date:u}");
     }
 }
